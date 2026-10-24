@@ -1,0 +1,40 @@
+VCD info: dumpfile sync_fifo_ecc.vcd opened for output.
+==============================================================
+ tb_sync_fifo_ecc  DATA_W=32 DEPTH=16 ECC_EN=1 CW_W=39 seed=20261022
+==============================================================
+T1  reset state                       done  (errors so far 0)
+T2  fill to full + 2 overflow writes  done  (errors so far 0)
+T3  simultaneous R/W at full          done  (errors so far 0)
+T4  drain + underflow, R/W at empty   done  (errors so far 0)
+T8  sticky status clear               done  (errors so far 0)
+T5  AF/AE threshold sweep (17 values) done  (errors so far 0)
+T6  single-bit fault, all 39 bit positions done  (errors so far 0)
+T7  200 double-bit faults             done  (errors so far 0)
+T9  SEC counter saturation (65540 ev) done  (errors so far 0)
+T10 random phase 0 (pW=90% pR=10%) done  (errors so far 0)
+T10 random phase 1 (pW=10% pR=90%) done  (errors so far 0)
+T10 random phase 2 (pW=50% pR=50%) done  (errors so far 0)
+T10 random phase 3 (pW=100% pR=100%) done  (errors so far 0)
+T10 random phase 4 (pW=70% pR=60%) done  (errors so far 0)
+T10 random phase 5 (pW=40% pR=45%) done  (errors so far 0)
+--------------------------------------------------------------
+ SUMMARY
+   clock cycles simulated          : 116489
+   writes accepted / reads accepted: 88337 / 88337
+   scoreboard comparisons          : 1486037
+   mismatches                      : 0
+ FUNCTIONAL COVERAGE
+   cycles full / empty             : 12147 / 8790
+   max occupancy reached           : 16 of 16
+   write-through at full           : 2324
+   blocked writes / blocked reads  : 7764 / 7298
+   simultaneous wr_en & rd_en      : 82616
+   almost_full / almost_empty rises: 462 / 499
+   status clears                   : 32
+   single / double faults injected : 65929 / 182
+   codeword bit positions covered  : 39 of 39
+   SEC events / DED events seen    : 65929 / 182
+   final sec_cnt / ded_cnt          : 12 / 2
+ RESULT: PASS
+==============================================================
+tb/tb_sync_fifo_ecc.v:405: $finish called at 1164916000 (1ps)

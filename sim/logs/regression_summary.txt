@@ -1,0 +1,19 @@
+== SECDED codec unit tests ==
+secded DATA_W=8                                PASS
+secded DATA_W=16                               PASS
+secded DATA_W=32                               PASS
+secded DATA_W=64                               PASS
+== Baseline FIFO ==
+fifo_baseline W32 D16                          PASS
+== SECDED FIFO configurations ==
+fifo_main_w32_d16_ecc (W=32 D=16 ECC=1 +vcd +sat) PASS
+fifo_w8_d4_ecc (W=8 D=4 ECC=1 +seed=11)        PASS
+fifo_w16_d8_ecc (W=16 D=8 ECC=1 +seed=22)      PASS
+fifo_w64_d64_ecc (W=64 D=64 ECC=1 +seed=33)    PASS
+fifo_w32_d16_noecc (W=32 D=16 ECC=0 +seed=44)  PASS
+fifo_w32_d16_seed101 (W=32 D=16 ECC=1 +seed=101) PASS
+fifo_w32_d16_seed202 (W=32 D=16 ECC=1 +seed=202) PASS
+fifo_w32_d16_seed303 (W=32 D=16 ECC=1 +seed=303) PASS
+fifo_w32_d16_seed404 (W=32 D=16 ECC=1 +seed=404) PASS
+------------------------------------------------
+TOTAL: 14 passed, 0 failed

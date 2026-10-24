@@ -1,0 +1,1 @@
+Yosys 0.70 (git sha1 28ba3cb92, Release, GNU /opt/rh/gcc-toolset-14/root/usr/bin/c++ 14.2.1) (via pyosys)

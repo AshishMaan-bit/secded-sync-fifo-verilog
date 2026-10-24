@@ -1,0 +1,38 @@
+==============================================================
+ tb_sync_fifo_ecc  DATA_W=64 DEPTH=64 ECC_EN=1 CW_W=72 seed=33
+==============================================================
+T1  reset state                       done  (errors so far 0)
+T2  fill to full + 2 overflow writes  done  (errors so far 0)
+T3  simultaneous R/W at full          done  (errors so far 0)
+T4  drain + underflow, R/W at empty   done  (errors so far 0)
+T8  sticky status clear               done  (errors so far 0)
+T5  AF/AE threshold sweep (65 values) done  (errors so far 0)
+T6  single-bit fault, all 72 bit positions done  (errors so far 0)
+T7  200 double-bit faults             done  (errors so far 0)
+T10 random phase 0 (pW=90% pR=10%) done  (errors so far 0)
+T10 random phase 1 (pW=10% pR=90%) done  (errors so far 0)
+T10 random phase 2 (pW=50% pR=50%) done  (errors so far 0)
+T10 random phase 3 (pW=100% pR=100%) done  (errors so far 0)
+T10 random phase 4 (pW=70% pR=60%) done  (errors so far 0)
+T10 random phase 5 (pW=40% pR=45%) done  (errors so far 0)
+--------------------------------------------------------------
+ SUMMARY
+   clock cycles simulated          : 29073
+   writes accepted / reads accepted: 13692 / 13692
+   scoreboard comparisons          : 362409
+   mismatches                      : 0
+ FUNCTIONAL COVERAGE
+   cycles full / empty             : 4578 / 3271
+   max occupancy reached           : 64 of 64
+   write-through at full           : 866
+   blocked writes / blocked reads  : 3013 / 2725
+   simultaneous wr_en & rd_en      : 6987
+   almost_full / almost_empty rises: 168 / 103
+   status clears                   : 16
+   single / double faults injected : 195 / 172
+   codeword bit positions covered  : 72 of 72
+   SEC events / DED events seen    : 195 / 172
+   final sec_cnt / ded_cnt          : 5 / 0
+ RESULT: PASS
+==============================================================
+tb/tb_sync_fifo_ecc.v:405: $finish called at 290756000 (1ps)

@@ -1,0 +1,16 @@
+id,bug,file,result,first_detection
+M1,write-through-when-full removed,sync_fifo_ecc.v,KILLED (500 mismatches),[236000] MISMATCH count : dut=f model=10
+M2,almost_full uses > instead of >=,sync_fifo_ecc.v,KILLED (180 mismatches),[186000] MISMATCH almost_full : dut=0 model=1
+M3,almost_empty uses < instead of <=,sync_fifo_ecc.v,KILLED (208 mismatches),[66000] MISMATCH almost_empty : dut=0 model=1
+M4,occupancy ignores reads,sync_fifo_ecc.v,KILLED (500 mismatches),[236000] MISMATCH count : dut=11 model=10
+M5,read pointer advances on rd_en (not rd_fire),sync_fifo_ecc.v,KILLED (500 mismatches),[766000] MISMATCH rd_data : dut=b0000014 model=c0ffee00
+M6,overflow flag not sticky-set,sync_fifo_ecc.v,KILLED (500 mismatches),[216000] MISMATCH overflow : dut=0 model=1
+M7,underflow detection removed,sync_fifo_ecc.v,KILLED (500 mismatches),[716000] MISMATCH underflow : dut=0 model=1
+M8,status clear does not clear counters,sync_fifo_ecc.v,KILLED (500 mismatches),[9386000] MISMATCH sec_cnt : dut=27 model=0
+M9,SEC counter does not saturate (wraps),sync_fifo_ecc.v,KILLED (46 mismatches),[664366000] MISMATCH sec_cnt : dut=0 model=ffff
+M10,full flag one entry early,sync_fifo_ecc.v,KILLED (500 mismatches),[196000] MISMATCH full : dut=1 model=0
+M11,decoder does not correct single errors,secded_dec.v,KILLED (57 mismatches),[6596000] MISMATCH rd_data : dut=1862c331 model=1862c330
+M12,encoder overall-parity bit stuck at 0,secded_enc.v,KILLED (500 mismatches),[236000] MISMATCH sec_err : dut=1 model=0
+M13,encoder check bit uses wrong coverage,secded_enc.v,KILLED (500 mismatches),[236000] MISMATCH ded_err : dut=1 model=0
+M14,DED reported as SEC (double errors miscorrected),secded_dec.v,KILLED (500 mismatches),[7236000] MISMATCH sec_err : dut=1 model=0
+M15,rd_valid asserted on rd_en (not rd_fire),sync_fifo_ecc.v,KILLED (500 mismatches),[716000] MISMATCH rd_valid : dut=1 model=0

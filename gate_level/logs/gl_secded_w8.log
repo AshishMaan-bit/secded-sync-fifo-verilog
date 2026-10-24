@@ -1,0 +1,9 @@
+--------------------------------------------------------------
+ SECDED unit test  DATA_W=8  PAR_W=4  CW_W=13
+   clean words checked      : 256
+   single-bit errors checked: 3328
+   double-bit errors checked: 19968
+   mismatches               : 0
+ RESULT: PASS
+--------------------------------------------------------------
+tb/tb_secded.v:100: $finish called at 23808000 (1ps)

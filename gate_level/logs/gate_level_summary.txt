@@ -1,0 +1,7 @@
+SECDED codec DATA_W=8  (transistor level)                  PASS
+SECDED codec DATA_W=32  (transistor level)                 PASS
+baseline FIFO W=8 D=4  (transistor level)                  PASS
+SECDED FIFO W=8 D=4 +sat (transistor level)                PASS
+SECDED FIFO W=32 D=16 (transistor level, 47k transistors)  PASS
+negative control: broken NAND2 cell is detected            PASS
+TOTAL: 6 passed, 0 failed

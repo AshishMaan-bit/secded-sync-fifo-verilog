@@ -1,0 +1,39 @@
+==============================================================
+ tb_sync_fifo_ecc  DATA_W=8 DEPTH=4 ECC_EN=1 CW_W=13 seed=7
+==============================================================
+T1  reset state                       done  (errors so far 0)
+T2  fill to full + 2 overflow writes  done  (errors so far 0)
+T3  simultaneous R/W at full          done  (errors so far 0)
+T4  drain + underflow, R/W at empty   done  (errors so far 0)
+T8  sticky status clear               done  (errors so far 0)
+T5  AF/AE threshold sweep (5 values) done  (errors so far 0)
+T6  single-bit fault, all 13 bit positions done  (errors so far 0)
+T7  200 double-bit faults             done  (errors so far 0)
+T9  SEC counter saturation (65540 ev) done  (errors so far 0)
+T10 random phase 0 (pW=90% pR=10%) done  (errors so far 0)
+T10 random phase 1 (pW=10% pR=90%) done  (errors so far 0)
+T10 random phase 2 (pW=50% pR=50%) done  (errors so far 0)
+T10 random phase 3 (pW=100% pR=100%) done  (errors so far 0)
+T10 random phase 4 (pW=70% pR=60%) done  (errors so far 0)
+T10 random phase 5 (pW=40% pR=45%) done  (errors so far 0)
+--------------------------------------------------------------
+ SUMMARY
+   clock cycles simulated          : 85852
+   writes accepted / reads accepted: 74376 / 74376
+   scoreboard comparisons          : 1104507
+   mismatches                      : 0
+ FUNCTIONAL COVERAGE
+   cycles full / empty             : 5796 / 4181
+   max occupancy reached           : 4 of 4
+   write-through at full           : 1125
+   blocked writes / blocked reads  : 3369 / 3239
+   simultaneous wr_en & rd_en      : 72455
+   almost_full / almost_empty rises: 703 / 420
+   status clears                   : 14
+   single / double faults injected : 65683 / 107
+   codeword bit positions covered  : 13 of 13
+   SEC events / DED events seen    : 65683 / 107
+   final sec_cnt / ded_cnt          : 28 / 9
+ RESULT: PASS
+==============================================================
+tb/tb_sync_fifo_ecc.v:405: $finish called at 858546000 (1ps)

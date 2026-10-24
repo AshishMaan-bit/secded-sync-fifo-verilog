@@ -1,0 +1,839 @@
+
+-- Running command `read_verilog -defer /home/claude/sync_fifo_ecc/rtl/secded_dec.v; chparam -set DATA_W 8 secded_dec; hierarchy -check -top secded_dec; synth -flatten -top secded_dec; abc -g AND,NAND,OR,NOR,XOR,XNOR,ANDNOT,ORNOT,MUX; opt_clean -purge; tee -o /dev/null check -assert; stat; stat -tech cmos; ltp -noff' --
+
+1. Executing Verilog-2005 frontend: /home/claude/sync_fifo_ecc/rtl/secded_dec.v
+Parsing Verilog input from `/home/claude/sync_fifo_ecc/rtl/secded_dec.v' to AST representation.
+Storing AST representation for module `$abstract\secded_dec'.
+Successfully finished Verilog frontend.
+Parameter \DATA_W = 8
+
+2. Executing AST frontend in derive mode using pre-parsed AST for module `\secded_dec'.
+Parameter \DATA_W = 8
+Generating RTLIL representation for module `$paramod\secded_dec\DATA_W=s32'00000000000000000000000000001000'.
+
+3. Executing HIERARCHY pass (managing design hierarchy).
+
+4. Executing AST frontend in derive mode using pre-parsed AST for module `\secded_dec'.
+Generating RTLIL representation for module `\secded_dec'.
+
+4.1. Analyzing design hierarchy..
+Top module:  \secded_dec
+
+4.2. Analyzing design hierarchy..
+Top module:  \secded_dec
+Removing unused module `$abstract\secded_dec'.
+Removed 1 unused modules.
+
+5. Executing SYNTH pass.
+
+5.1. Executing HIERARCHY pass (managing design hierarchy).
+
+5.1.1. Analyzing design hierarchy..
+Top module:  \secded_dec
+
+5.1.2. Analyzing design hierarchy..
+Top module:  \secded_dec
+Removed 0 unused modules.
+
+5.2. Executing PROC pass (convert processes to netlists).
+
+5.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 52 empty switches in `\secded_dec.$proc$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:34$153'.
+Cleaned up 52 empty switches.
+
+5.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 24 switch rules as full_case in process $proc$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:34$153 in module secded_dec.
+Removed a total of 0 dead cases.
+
+5.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 44 assignments to connections.
+
+5.2.4. Executing PROC_INIT pass (extract init attributes).
+
+5.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+5.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~24 debug messages>
+
+5.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\secded_dec.$proc$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:34$153'.
+     1/58: $8\k[31:0]
+     2/58: $8\data_o[7:0]
+     3/58: $1$bitselwrite$pos$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:65$152[31:0]$276
+     4/58: $7\k[31:0]
+     5/58: $7\data_o[7:0]
+     6/58: $1$bitselwrite$pos$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:65$151[31:0]$267
+     7/58: $6\k[31:0]
+     8/58: $6\data_o[7:0]
+     9/58: $1$bitselwrite$pos$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:65$150[31:0]$258
+    10/58: $5\k[31:0]
+    11/58: $5\data_o[7:0]
+    12/58: $1$bitselwrite$pos$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:65$149[31:0]$249
+    13/58: $4\k[31:0]
+    14/58: $4\data_o[7:0]
+    15/58: $1$bitselwrite$pos$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:65$148[31:0]$240
+    16/58: $3\k[31:0]
+    17/58: $3\data_o[7:0]
+    18/58: $1$bitselwrite$pos$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:65$147[31:0]$231
+    19/58: $2\k[31:0]
+    20/58: $2\data_o[7:0]
+    21/58: $1$bitselwrite$pos$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:65$146[31:0]$222
+    22/58: $1\k[31:0]
+    23/58: $1\data_o[7:0]
+    24/58: $1$bitselwrite$pos$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:65$145[31:0]$213
+    25/58: $3\ded_o[0:0]
+    26/58: $2\fixed[12:0] [12]
+    27/58: $14\fixed[11:11]
+    28/58: $13\fixed[10:10]
+    29/58: $12\fixed[9:9]
+    30/58: $11\fixed[8:8]
+    31/58: $10\fixed[7:7]
+    32/58: $9\fixed[6:6]
+    33/58: $8\fixed[5:5]
+    34/58: $7\fixed[4:4]
+    35/58: $6\fixed[3:3]
+    36/58: $5\fixed[2:2]
+    37/58: $4\fixed[1:1]
+    38/58: $3\fixed[0:0]
+    39/58: $2\i[31:0]
+    40/58: $2\fixed[12:0] [11]
+    41/58: $2\fixed[12:0] [10]
+    42/58: $2\fixed[12:0] [9]
+    43/58: $2\fixed[12:0] [8]
+    44/58: $2\fixed[12:0] [7]
+    45/58: $2\fixed[12:0] [6]
+    46/58: $2\fixed[12:0] [5]
+    47/58: $2\fixed[12:0] [4]
+    48/58: $2\fixed[12:0] [3]
+    49/58: $2\fixed[12:0] [2]
+    50/58: $2\fixed[12:0] [1]
+    51/58: $2\fixed[12:0] [0]
+    52/58: $15\fixed[12:12]
+    53/58: $2\sec_o[0:0]
+    54/58: $2\ded_o[0:0]
+    55/58: $1\fixed[12:0]
+    56/58: $1\ded_o[0:0]
+    57/58: $1\sec_o[0:0]
+    58/58: $1\i[31:0]
+
+5.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\secded_dec.\i' from process `\secded_dec.$proc$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:34$153'.
+No latch inferred for signal `\secded_dec.\data_o' from process `\secded_dec.$proc$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:34$153'.
+No latch inferred for signal `\secded_dec.\sec_o' from process `\secded_dec.$proc$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:34$153'.
+No latch inferred for signal `\secded_dec.\ded_o' from process `\secded_dec.$proc$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:34$153'.
+No latch inferred for signal `\secded_dec.\syndrome_o' from process `\secded_dec.$proc$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:34$153'.
+No latch inferred for signal `\secded_dec.\fixed' from process `\secded_dec.$proc$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:34$153'.
+No latch inferred for signal `\secded_dec.\syn' from process `\secded_dec.$proc$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:34$153'.
+No latch inferred for signal `\secded_dec.\ovp' from process `\secded_dec.$proc$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:34$153'.
+No latch inferred for signal `\secded_dec.\j' from process `\secded_dec.$proc$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:34$153'.
+No latch inferred for signal `\secded_dec.\k' from process `\secded_dec.$proc$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:34$153'.
+No latch inferred for signal `\secded_dec.\syn_i' from process `\secded_dec.$proc$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:34$153'.
+
+5.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+5.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+5.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 24 empty switches in `\secded_dec.$proc$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:34$153'.
+Removing empty process `secded_dec.$proc$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:34$153'.
+Cleaned up 24 empty switches.
+
+5.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module secded_dec.
+<suppressed ~63 debug messages>
+
+5.3. Executing CHECK pass (checking for obvious problems).
+Checking module secded_dec...
+Found and reported 0 problems.
+
+5.4. Executing FLATTEN pass (flatten design).
+
+5.5. Executing OPT_EXPR pass (perform const folding).
+Optimizing module secded_dec.
+
+5.6. Executing CHECK pass (checking for obvious problems).
+Checking module secded_dec...
+Found and reported 0 problems.
+
+5.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \secded_dec..
+Removed 2 unused cells and 255 unused wires.
+<suppressed ~3 debug messages>
+
+5.8. Executing OPT pass (performing simple optimizations).
+
+5.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module secded_dec.
+
+5.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\secded_dec'.
+Computing hashes of 128 cells of `\secded_dec'.
+Finding duplicate cells in `\secded_dec'.
+Removed a total of 0 cells.
+
+5.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \secded_dec..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$346.
+    dead port 2/2 on $mux $procmux$344.
+    dead port 2/2 on $mux $procmux$337.
+    dead port 2/2 on $mux $procmux$335.
+    dead port 2/2 on $mux $procmux$328.
+    dead port 2/2 on $mux $procmux$326.
+    dead port 2/2 on $mux $procmux$319.
+    dead port 1/2 on $mux $procmux$313.
+    dead port 2/2 on $mux $procmux$425.
+    dead port 2/2 on $mux $procmux$355.
+    dead port 2/2 on $mux $procmux$427.
+    dead port 2/2 on $mux $procmux$362.
+    dead port 2/2 on $mux $procmux$353.
+    dead port 2/2 on $mux $procmux$438.
+    dead port 2/2 on $mux $procmux$364.
+    dead port 2/2 on $mux $procmux$371.
+    dead port 2/2 on $mux $procmux$444.
+    dead port 2/2 on $mux $procmux$450.
+    dead port 2/2 on $mux $procmux$373.
+    dead port 2/2 on $mux $procmux$380.
+    dead port 2/2 on $mux $procmux$456.
+    dead port 2/2 on $mux $procmux$462.
+    dead port 2/2 on $mux $procmux$382.
+    dead port 2/2 on $mux $procmux$389.
+    dead port 2/2 on $mux $procmux$468.
+    dead port 2/2 on $mux $procmux$474.
+    dead port 2/2 on $mux $procmux$391.
+    dead port 2/2 on $mux $procmux$398.
+    dead port 2/2 on $mux $procmux$480.
+    dead port 2/2 on $mux $procmux$486.
+    dead port 2/2 on $mux $procmux$400.
+    dead port 2/2 on $mux $procmux$407.
+    dead port 2/2 on $mux $procmux$492.
+    dead port 2/2 on $mux $procmux$498.
+    dead port 2/2 on $mux $procmux$409.
+    dead port 2/2 on $mux $procmux$416.
+    dead port 2/2 on $mux $procmux$504.
+    dead port 2/2 on $mux $procmux$511.
+    dead port 2/2 on $mux $procmux$513.
+    dead port 2/2 on $mux $procmux$418.
+    dead port 2/2 on $mux $procmux$519.
+    dead port 2/2 on $mux $procmux$525.
+Removed 42 multiplexer ports.
+<suppressed ~77 debug messages>
+
+5.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \secded_dec.
+Performed a total of 0 changes.
+
+5.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\secded_dec'.
+Computing hashes of 86 cells of `\secded_dec'.
+Finding duplicate cells in `\secded_dec'.
+Removed a total of 0 cells.
+
+5.8.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \secded_dec..
+Removed 0 unused cells and 42 unused wires.
+<suppressed ~1 debug messages>
+
+5.8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module secded_dec.
+
+5.8.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.8.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \secded_dec..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~35 debug messages>
+
+5.8.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \secded_dec.
+Performed a total of 0 changes.
+
+5.8.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\secded_dec'.
+Computing hashes of 86 cells of `\secded_dec'.
+Finding duplicate cells in `\secded_dec'.
+Removed a total of 0 cells.
+
+5.8.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.8.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \secded_dec..
+
+5.8.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module secded_dec.
+
+5.8.16. Finished fast OPT passes. (There is nothing left to do.)
+
+5.9. Executing FSM pass (extract and optimize FSM).
+
+5.9.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+5.9.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+5.9.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+5.9.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \secded_dec..
+
+5.9.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+5.9.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+5.9.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+5.9.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+5.10. Executing OPT pass (performing simple optimizations).
+
+5.10.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module secded_dec.
+
+5.10.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\secded_dec'.
+Computing hashes of 86 cells of `\secded_dec'.
+Finding duplicate cells in `\secded_dec'.
+Removed a total of 0 cells.
+
+5.10.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \secded_dec..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~35 debug messages>
+
+5.10.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \secded_dec.
+Performed a total of 0 changes.
+
+5.10.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\secded_dec'.
+Computing hashes of 86 cells of `\secded_dec'.
+Finding duplicate cells in `\secded_dec'.
+Removed a total of 0 cells.
+
+5.10.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.10.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \secded_dec..
+
+5.10.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module secded_dec.
+
+5.10.9. Finished fast OPT passes. (There is nothing left to do.)
+
+5.11. Executing WREDUCE pass (reducing word size of cells).
+Removed top 27 bits (of 32) from port A of cell secded_dec.$le$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:49$185 ($le).
+Removed top 27 bits (of 32) from port B of cell secded_dec.$le$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:49$185 ($le).
+Converting cell secded_dec.$le$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:49$185 ($le) from signed to unsigned.
+Removed top 1 bits (of 5) from port A of cell secded_dec.$le$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:49$185 ($le).
+Removed top 1 bits (of 5) from port B of cell secded_dec.$le$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:49$185 ($le).
+Removed top 2 bits (of 4) from port B of cell secded_dec.$eq$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:52$188 ($eq).
+Removed top 1 bits (of 4) from port B of cell secded_dec.$eq$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:52$190 ($eq).
+Removed top 1 bits (of 4) from port B of cell secded_dec.$eq$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:52$192 ($eq).
+Removed top 1 bits (of 4) from port B of cell secded_dec.$eq$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:52$210 ($eq).
+Removed top 7 bits (of 8) from port A of cell secded_dec.$or$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:65$229 ($or).
+Removed top 6 bits (of 8) from port B of cell secded_dec.$or$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:65$229 ($or).
+Removed top 6 bits (of 8) from port Y of cell secded_dec.$or$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:65$229 ($or).
+Removed top 6 bits (of 8) from port A of cell secded_dec.$or$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:65$238 ($or).
+Removed top 5 bits (of 8) from port B of cell secded_dec.$or$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:65$238 ($or).
+Removed top 5 bits (of 8) from port Y of cell secded_dec.$or$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:65$238 ($or).
+Removed top 5 bits (of 8) from port A of cell secded_dec.$or$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:65$247 ($or).
+Removed top 4 bits (of 8) from port B of cell secded_dec.$or$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:65$247 ($or).
+Removed top 4 bits (of 8) from port Y of cell secded_dec.$or$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:65$247 ($or).
+Removed top 4 bits (of 8) from port A of cell secded_dec.$or$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:65$256 ($or).
+Removed top 3 bits (of 8) from port B of cell secded_dec.$or$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:65$256 ($or).
+Removed top 3 bits (of 8) from port Y of cell secded_dec.$or$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:65$256 ($or).
+Removed top 3 bits (of 8) from port A of cell secded_dec.$or$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:65$265 ($or).
+Removed top 2 bits (of 8) from port B of cell secded_dec.$or$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:65$265 ($or).
+Removed top 2 bits (of 8) from port Y of cell secded_dec.$or$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:65$265 ($or).
+Removed top 2 bits (of 8) from port A of cell secded_dec.$or$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:65$274 ($or).
+Removed top 1 bits (of 8) from port B of cell secded_dec.$or$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:65$274 ($or).
+Removed top 1 bits (of 8) from port Y of cell secded_dec.$or$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:65$274 ($or).
+Removed top 1 bits (of 8) from port A of cell secded_dec.$or$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:65$283 ($or).
+Removed top 1 bits (of 8) from wire secded_dec.$7\data_o[7:0].
+Removed top 2 bits (of 8) from wire secded_dec.$6\data_o[7:0].
+Removed top 5 bits (of 8) from wire secded_dec.$3\data_o[7:0].
+Removed top 4 bits (of 8) from wire secded_dec.$4\data_o[7:0].
+Removed top 3 bits (of 8) from wire secded_dec.$5\data_o[7:0].
+Removed top 6 bits (of 8) from wire secded_dec.$2\data_o[7:0].
+
+5.12. Executing PEEPOPT pass (run peephole optimizers).
+
+5.13. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \secded_dec..
+Removed 0 unused cells and 6 unused wires.
+<suppressed ~1 debug messages>
+
+5.14. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module secded_dec:
+  creating $alu model for $le$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:49$185 ($le): new $alu
+  creating $alu cell for $le$/home/claude/sync_fifo_ecc/rtl/secded_dec.v:49$185: $auto$alumacc.cc:578:replace_alu$546
+  created 1 $alu and 0 $macc cells.
+
+5.15. Executing SHARE pass (SAT-based resource sharing).
+
+5.16. Executing OPT pass (performing simple optimizations).
+
+5.16.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module secded_dec.
+
+5.16.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\secded_dec'.
+Computing hashes of 89 cells of `\secded_dec'.
+Finding duplicate cells in `\secded_dec'.
+Removed a total of 0 cells.
+
+5.16.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \secded_dec..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~35 debug messages>
+
+5.16.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \secded_dec.
+Performed a total of 0 changes.
+
+5.16.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\secded_dec'.
+Computing hashes of 89 cells of `\secded_dec'.
+Finding duplicate cells in `\secded_dec'.
+Removed a total of 0 cells.
+
+5.16.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.16.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \secded_dec..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+5.16.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module secded_dec.
+
+5.16.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.16.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \secded_dec..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~35 debug messages>
+
+5.16.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \secded_dec.
+Performed a total of 0 changes.
+
+5.16.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\secded_dec'.
+Computing hashes of 89 cells of `\secded_dec'.
+Finding duplicate cells in `\secded_dec'.
+Removed a total of 0 cells.
+
+5.16.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.16.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \secded_dec..
+
+5.16.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module secded_dec.
+
+5.16.16. Finished fast OPT passes. (There is nothing left to do.)
+
+5.17. Executing MEMORY pass.
+
+5.17.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+5.17.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+5.17.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+5.17.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+5.17.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+5.17.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \secded_dec..
+
+5.17.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+5.17.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+5.17.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \secded_dec..
+
+5.17.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+5.18. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \secded_dec..
+
+5.19. Executing OPT pass (performing simple optimizations).
+
+5.19.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module secded_dec.
+<suppressed ~5 debug messages>
+
+5.19.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\secded_dec'.
+Computing hashes of 89 cells of `\secded_dec'.
+Finding duplicate cells in `\secded_dec'.
+Removed a total of 0 cells.
+
+5.19.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.19.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \secded_dec..
+Removed 0 unused cells and 4 unused wires.
+<suppressed ~1 debug messages>
+
+5.19.5. Finished fast OPT passes.
+
+5.20. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+5.21. Executing OPT pass (performing simple optimizations).
+
+5.21.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module secded_dec.
+
+5.21.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\secded_dec'.
+Computing hashes of 89 cells of `\secded_dec'.
+Finding duplicate cells in `\secded_dec'.
+Removed a total of 0 cells.
+
+5.21.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \secded_dec..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~30 debug messages>
+
+5.21.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \secded_dec.
+Performed a total of 0 changes.
+
+5.21.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\secded_dec'.
+Computing hashes of 89 cells of `\secded_dec'.
+Finding duplicate cells in `\secded_dec'.
+Removed a total of 0 cells.
+
+5.21.6. Executing OPT_SHARE pass.
+
+5.21.7. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.21.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \secded_dec..
+
+5.21.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module secded_dec.
+
+5.21.10. Finished fast OPT passes. (There is nothing left to do.)
+
+5.22. Executing TECHMAP pass (map to technology primitives).
+
+5.22.1. Executing Verilog-2005 frontend: /usr/local/lib/python3.13/dist-packages/pyosys/share/techmap.v
+Parsing Verilog input from `/usr/local/lib/python3.13/dist-packages/pyosys/share/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `$__div_mod_u'.
+Generating RTLIL representation for module `$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `$connect'.
+Generating RTLIL representation for module `$input_port'.
+Successfully finished Verilog frontend.
+
+5.22.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $reduce_or.
+Using extmapper simplemap for cells of type $reduce_and.
+Using template $paramod$7e708ae28ab761f11d0fb59d3ffc72f6a4baf5d9\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $xor.
+Using extmapper simplemap for cells of type $reduce_xor.
+Using extmapper simplemap for cells of type $logic_not.
+Using extmapper simplemap for cells of type $eq.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using extmapper simplemap for cells of type $or.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $and.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000000010 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000010 for cells of type $lcu.
+No more expansions possible.
+<suppressed ~296 debug messages>
+
+5.23. Executing OPT pass (performing simple optimizations).
+
+5.23.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module secded_dec.
+<suppressed ~115 debug messages>
+
+5.23.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\secded_dec'.
+Computing hashes of 172 cells of `\secded_dec'.
+Finding duplicate cells in `\secded_dec'.
+Computing hashes of 139 cells of `\secded_dec'.
+Finding duplicate cells in `\secded_dec'.
+Computing hashes of 126 cells of `\secded_dec'.
+Finding duplicate cells in `\secded_dec'.
+<suppressed ~138 debug messages>
+Removed a total of 46 cells.
+
+5.23.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.23.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \secded_dec..
+Removed 38 unused cells and 133 unused wires.
+<suppressed ~39 debug messages>
+
+5.23.5. Finished fast OPT passes.
+
+5.24. Executing ABC pass (technology mapping using ABC).
+
+5.24.1. Summary of detected clock domains:
+  88 cells in clk={ }, en={ }, arst={ }, srst={ }
+
+5.24.2. Extracting gate netlist of module `\secded_dec' to `<abc-temp-dir>/input.blif'..
+No matching clock domain found. Not extracting any FF cells.
+
+5.24.2.1. Executed ABC.
+Extracted 88 gates and 101 wires to a netlist network with 13 inputs and 14 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+5.24.2.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        5
+ABC RESULTS:            ANDNOT cells:        3
+ABC RESULTS:               MUX cells:        2
+ABC RESULTS:              NAND cells:       11
+ABC RESULTS:               NOR cells:        3
+ABC RESULTS:               NOT cells:        3
+ABC RESULTS:              XNOR cells:       24
+ABC RESULTS:               XOR cells:        2
+ABC RESULTS:        internal signals:       74
+ABC RESULTS:           input signals:       13
+ABC RESULTS:          output signals:       14
+Removing temp directory.
+Removing global temp directory.
+
+5.25. Executing OPT pass (performing simple optimizations).
+
+5.25.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module secded_dec.
+
+5.25.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\secded_dec'.
+Computing hashes of 53 cells of `\secded_dec'.
+Finding duplicate cells in `\secded_dec'.
+Removed a total of 0 cells.
+
+5.25.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.25.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \secded_dec..
+Removed 0 unused cells and 86 unused wires.
+<suppressed ~2 debug messages>
+
+5.25.5. Finished fast OPT passes.
+
+5.26. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `secded_dec'. Setting top module to secded_dec.
+
+5.26.1. Analyzing design hierarchy..
+Top module:  \secded_dec
+
+5.26.2. Analyzing design hierarchy..
+Top module:  \secded_dec
+Removed 0 unused modules.
+
+5.27. Printing statistics.
+
+=== secded_dec ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       50 wires
+      211 wire bits
+       11 public wires
+      172 public wire bits
+        5 ports
+       27 port bits
+       53 cells
+        3   $_ANDNOT_
+        5   $_AND_
+        2   $_MUX_
+       11   $_NAND_
+        3   $_NOR_
+        3   $_NOT_
+       24   $_XNOR_
+        2   $_XOR_
+
+5.28. Executing CHECK pass (checking for obvious problems).
+Checking module secded_dec...
+Found and reported 0 problems.
+
+6. Executing ABC pass (technology mapping using ABC).
+
+6.1. Summary of detected clock domains:
+  53 cells in clk={ }, en={ }, arst={ }, srst={ }
+
+6.2. Extracting gate netlist of module `\secded_dec' to `<abc-temp-dir>/input.blif'..
+No matching clock domain found. Not extracting any FF cells.
+
+6.2.1. Executed ABC.
+Extracted 53 gates and 66 wires to a netlist network with 13 inputs and 14 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+6.2.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        7
+ABC RESULTS:            ANDNOT cells:        4
+ABC RESULTS:               MUX cells:        1
+ABC RESULTS:              NAND cells:        8
+ABC RESULTS:               NOR cells:        2
+ABC RESULTS:               NOT cells:        3
+ABC RESULTS:                OR cells:        1
+ABC RESULTS:             ORNOT cells:        1
+ABC RESULTS:              XNOR cells:       22
+ABC RESULTS:               XOR cells:        4
+ABC RESULTS:        internal signals:       39
+ABC RESULTS:           input signals:       13
+ABC RESULTS:          output signals:       14
+Removing temp directory.
+Removing global temp directory.
+
+7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \secded_dec..
+Removed 0 unused cells and 72 unused wires.
+<suppressed ~7 debug messages>
+
+8. Executing CHECK pass (checking for obvious problems).
+Checking module secded_dec...
+Found and reported 0 problems.
+
+9. Printing statistics.
+
+=== secded_dec ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       44 wires
+       66 wire bits
+        5 public wires
+       27 public wire bits
+        5 ports
+       27 port bits
+       53 cells
+        4   $_ANDNOT_
+        7   $_AND_
+        1   $_MUX_
+        8   $_NAND_
+        2   $_NOR_
+        3   $_NOT_
+        1   $_ORNOT_
+        1   $_OR_
+       22   $_XNOR_
+        4   $_XOR_
+
+10. Printing statistics.
+
+=== secded_dec ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       44 wires
+       66 wire bits
+        5 public wires
+       27 public wire bits
+        5 ports
+       27 port bits
+       53 cells
+        4   $_ANDNOT_
+        7   $_AND_
+        1   $_MUX_
+        8   $_NAND_
+        2   $_NOR_
+        3   $_NOT_
+        1   $_ORNOT_
+        1   $_OR_
+       22   $_XNOR_
+        4   $_XOR_
+
+   Estimated number of transistors:        448
+
+11. Executing LTP pass (find longest path).
+
+Longest topological path in secded_dec (length=7):
+    0: \cw_i [12]
+    1: $abc$1037$new_n40 (via $abc$1037$blif$1037$12)
+    2: $abc$1037$new_n41 (via $abc$1037$blif$1037$13)
+    3: $abc$1037$new_n42 (via $abc$1037$blif$1037$14)
+    4: $abc$1037$new_n65 (via $abc$1037$blif$1037$37)
+    5: $abc$1037$new_n74 (via $abc$1037$blif$1037$46)
+    6: $abc$1037$new_n76 (via $abc$1037$blif$1037$48)
+    7: \ded_o (via $abc$1037$blif$1037$52)

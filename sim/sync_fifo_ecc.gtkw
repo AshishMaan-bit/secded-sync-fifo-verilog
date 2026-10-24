@@ -1,0 +1,32 @@
+[*] GTKWave save file for sync_fifo_ecc.vcd
+[dumpfile] "sync_fifo_ecc.vcd"
+[timestart] 0
+@28
+tb_sync_fifo_ecc.clk
+tb_sync_fifo_ecc.rst_n
+tb_sync_fifo_ecc.wr_en
+tb_sync_fifo_ecc.rd_en
+@22
+tb_sync_fifo_ecc.wr_data[31:0]
+@24
+tb_sync_fifo_ecc.count[4:0]
+@28
+tb_sync_fifo_ecc.full
+tb_sync_fifo_ecc.almost_full
+tb_sync_fifo_ecc.empty
+tb_sync_fifo_ecc.almost_empty
+tb_sync_fifo_ecc.overflow
+tb_sync_fifo_ecc.underflow
+tb_sync_fifo_ecc.rd_valid
+@22
+tb_sync_fifo_ecc.rd_data[31:0]
+@28
+tb_sync_fifo_ecc.inj_en
+@22
+tb_sync_fifo_ecc.inj_mask[38:0]
+@28
+tb_sync_fifo_ecc.sec_err
+tb_sync_fifo_ecc.ded_err
+@24
+tb_sync_fifo_ecc.sec_cnt[15:0]
+tb_sync_fifo_ecc.ded_cnt[15:0]

@@ -1,0 +1,31 @@
+==============================================================
+ tb_sync_fifo_ecc  DATA_W=8 DEPTH=4 ECC_EN=1 CW_W=13 seed=20261022
+==============================================================
+[36000] MISMATCH count : dut=X model=0
+[36000] MISMATCH full : dut=X model=0
+[36000] MISMATCH empty : dut=X model=1
+[36000] MISMATCH almost_full : dut=X model=0
+[36000] MISMATCH almost_empty : dut=X model=1
+[36000] MISMATCH sec_cnt : dut=XXxX model=0
+[36000] MISMATCH ded_cnt : dut=XXXX model=0
+[46000] MISMATCH count : dut=X model=0
+[46000] MISMATCH full : dut=X model=0
+[46000] MISMATCH empty : dut=X model=1
+[46000] MISMATCH almost_full : dut=X model=0
+[46000] MISMATCH almost_empty : dut=X model=1
+[46000] MISMATCH sec_cnt : dut=XXxX model=0
+[46000] MISMATCH ded_cnt : dut=XXXX model=0
+T1  reset state                       done  (errors so far 14)
+[56000] MISMATCH count : dut=X model=1
+[56000] MISMATCH full : dut=X model=0
+[56000] MISMATCH empty : dut=X model=0
+[56000] MISMATCH almost_full : dut=X model=0
+[56000] MISMATCH almost_empty : dut=X model=1
+[56000] MISMATCH overflow : dut=X model=0
+T2  fill to full + 2 overflow writes  done  (errors so far 64)
+T3  simultaneous R/W at full          done  (errors so far 169)
+T4  drain + underflow, R/W at empty   done  (errors so far 302)
+T8  sticky status clear               done  (errors so far 309)
+ mismatches                      : 500 (aborted)
+ RESULT: FAIL
+tb/tb_sync_fifo_ecc.v:106: $finish called at 496000 (1ps)

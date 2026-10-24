@@ -1,0 +1,33 @@
+Golden (unmutated) design : PASS
+M1   write-through-when-full removed                    KILLED (500 mismatches)
+       first detection: [236000] MISMATCH count : dut=f model=10
+M2   almost_full uses > instead of >=                   KILLED (180 mismatches)
+       first detection: [186000] MISMATCH almost_full : dut=0 model=1
+M3   almost_empty uses < instead of <=                  KILLED (208 mismatches)
+       first detection: [66000] MISMATCH almost_empty : dut=0 model=1
+M4   occupancy ignores reads                            KILLED (500 mismatches)
+       first detection: [236000] MISMATCH count : dut=11 model=10
+M5   read pointer advances on rd_en (not rd_fire)       KILLED (500 mismatches)
+       first detection: [766000] MISMATCH rd_data : dut=b0000014 model=c0ffee00
+M6   overflow flag not sticky-set                       KILLED (500 mismatches)
+       first detection: [216000] MISMATCH overflow : dut=0 model=1
+M7   underflow detection removed                        KILLED (500 mismatches)
+       first detection: [716000] MISMATCH underflow : dut=0 model=1
+M8   status clear does not clear counters               KILLED (500 mismatches)
+       first detection: [9386000] MISMATCH sec_cnt : dut=27 model=0
+M9   SEC counter does not saturate (wraps)              KILLED (46 mismatches)
+       first detection: [664366000] MISMATCH sec_cnt : dut=0 model=ffff
+M10  full flag one entry early                          KILLED (500 mismatches)
+       first detection: [196000] MISMATCH full : dut=1 model=0
+M11  decoder does not correct single errors             KILLED (57 mismatches)
+       first detection: [6596000] MISMATCH rd_data : dut=1862c331 model=1862c330
+M12  encoder overall-parity bit stuck at 0              KILLED (500 mismatches)
+       first detection: [236000] MISMATCH sec_err : dut=1 model=0
+M13  encoder check bit uses wrong coverage              KILLED (500 mismatches)
+       first detection: [236000] MISMATCH ded_err : dut=1 model=0
+M14  DED reported as SEC (double errors miscorrected)   KILLED (500 mismatches)
+       first detection: [7236000] MISMATCH sec_err : dut=1 model=0
+M15  rd_valid asserted on rd_en (not rd_fire)           KILLED (500 mismatches)
+       first detection: [716000] MISMATCH rd_valid : dut=1 model=0
+
+Mutation score: 15 / 15 killed (100.0 %)

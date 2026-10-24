@@ -1,0 +1,3 @@
+ tb_fifo_baseline DATA_W=32 DEPTH=16 : 70118 checks, 0 mismatches
+ RESULT: PASS
+tb/tb_fifo_baseline.v:61: $finish called at 200386000 (1ps)

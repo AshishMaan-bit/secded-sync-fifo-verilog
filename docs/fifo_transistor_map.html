@@ -1,0 +1,491 @@
+<title>FIFO Transistor Map</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one reading column on a cool schematic-paper ground; PMOS and NMOS keep fixed colors everywhere */
+:root {
+  --paper: #f3f6f7;
+  --sheet: #ffffff;
+  --ink: #14202b;
+  --ink-2: #4a5866;
+  --rule: #d5dde3;
+  --pmos: #b4431a;
+  --nmos: #0d6e66;
+  --wire: #33414d;
+  --accent: #2546a8;
+  --code-bg: #eaf0f3;
+  --font-display: "IBM Plex Sans Condensed", "Arial Narrow", Arial, sans-serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #10171d; --sheet: #172129; --ink: #e4ebf0; --ink-2: #a3b1bd; --rule: #2c3a45;
+    --pmos: #f0875c; --nmos: #4cc3b6; --wire: #b9c6d0; --accent: #8fa8ff; --code-bg: #1d2a33;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #10171d; --sheet: #172129; --ink: #e4ebf0; --ink-2: #a3b1bd; --rule: #2c3a45;
+  --pmos: #f0875c; --nmos: #4cc3b6; --wire: #b9c6d0; --accent: #8fa8ff; --code-bg: #1d2a33;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--paper); color: var(--ink);
+  font-family: var(--font-body); font-size: 16px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 32px 64px;
+}
+main { max-width: 980px; margin: 0 auto; display: grid; gap: 56px; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; }
+h2 { font-size: 1.75rem; font-weight: 600; }
+h3 { font-size: 1.2rem; font-weight: 600; }
+p { margin: 0; max-width: 68ch; }
+.eyebrow { font-family: var(--font-mono); font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); }
+section { display: grid; gap: 18px; min-width: 0; }
+code, .mono { font-family: var(--font-mono); font-size: .88em; }
+code { background: var(--code-bg); padding: 1px 5px; border-radius: 3px; }
+pre { margin: 0; font-family: var(--font-mono); font-size: .82rem; line-height: 1.5; background: var(--code-bg);
+      padding: 12px 14px; border-radius: 4px; overflow-x: auto; }
+.p { color: var(--pmos); font-weight: 600; }
+.n { color: var(--nmos); font-weight: 600; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* header */
+header { display: grid; gap: 14px; }
+.lede { font-size: 1.1rem; color: var(--ink-2); }
+.flow { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-family: var(--font-mono); font-size: .85rem; }
+.flow span.step { border: 1px solid var(--rule); background: var(--sheet); padding: 6px 10px; border-radius: 3px; }
+.flow span.arrow { color: var(--ink-2); }
+
+/* totals */
+.totals { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--rule);
+          border: 1px solid var(--rule); }
+.totals div { background: var(--sheet); padding: 14px 16px; display: grid; gap: 2px; }
+.totals b { font-family: var(--font-display); font-size: 1.8rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+.totals span { font-size: .85rem; color: var(--ink-2); }
+.totals div.sum { background: var(--code-bg); }
+
+/* cells */
+.cells { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.cell { background: var(--sheet); border: 1px solid var(--rule); padding: 18px; display: grid; gap: 12px; align-content: start; min-width: 0; }
+.cell header { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.cell.wide { grid-column: 1 / -1; }
+.cell.wide svg { max-width: 420px; }
+@media (min-width: 760px) {
+  .cell.wide { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); column-gap: 28px; }
+  .cell.wide header { grid-column: 1 / -1; }
+  .cell.wide svg { grid-row: span 1; }
+}
+.cell .tcount { font-family: var(--font-mono); font-size: .8rem; color: var(--ink-2); }
+.cell svg { width: 100%; height: auto; max-width: 260px; justify-self: center; }
+svg text { font-family: var(--font-mono); font-size: 11px; fill: var(--ink); }
+.tt { border-collapse: collapse; font-family: var(--font-mono); font-size: .8rem; }
+.tt th, .tt td { border: 1px solid var(--rule); padding: 2px 8px; text-align: center; font-variant-numeric: tabular-nums; }
+.tt th { color: var(--ink-2); font-weight: 500; }
+.rule-line { font-size: .92rem; }
+
+/* derived */
+.derived { width: 100%; border-collapse: collapse; font-size: .92rem; }
+.derived th, .derived td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.derived th { font-family: var(--font-mono); font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); font-weight: 500; }
+.derived td.num { font-variant-numeric: tabular-nums; font-family: var(--font-mono); white-space: nowrap; }
+.scroll { overflow-x: auto; }
+
+/* code map */
+.map { display: grid; gap: 14px; }
+.row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 0; background: var(--sheet); border: 1px solid var(--rule); }
+.row > div { padding: 14px 16px; min-width: 0; display: grid; gap: 8px; align-content: start; }
+.row > div:first-child { border-right: 1px solid var(--rule); background: var(--code-bg); }
+.row pre { background: transparent; padding: 0; }
+.row .where { font-family: var(--font-mono); font-size: .72rem; color: var(--ink-2); }
+.row .hw { font-size: .94rem; }
+.row .cnt { font-family: var(--font-mono); font-size: .8rem; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+@media (max-width: 680px) {
+  .row { grid-template-columns: 1fr; }
+  .row > div:first-child { border-right: 0; border-bottom: 1px solid var(--rule); }
+}
+
+/* budget bar */
+.budget { display: grid; gap: 10px; }
+.bar { display: flex; height: 34px; width: 100%; gap: 2px; }
+.bar div { height: 100%; }
+.legend { display: grid; gap: 6px; font-size: .92rem; }
+.legend div { display: grid; grid-template-columns: 14px minmax(0, 1fr) auto; gap: 10px; align-items: center; }
+.legend i { width: 14px; height: 14px; display: block; border-radius: 2px; }
+.legend span.v { font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--ink-2); }
+
+/* tree */
+.tree { font-family: var(--font-mono); font-size: .8rem; line-height: 1.55; background: var(--code-bg); padding: 12px 14px; overflow-x: auto; white-space: pre; border-radius: 4px; }
+.tree .g { color: var(--accent); }
+.tree .in { color: var(--nmos); }
+
+/* proof */
+.proof { width: 100%; border-collapse: collapse; font-size: .92rem; }
+.proof td { padding: 8px 10px; border-bottom: 1px solid var(--rule); }
+.proof td:last-child { text-align: right; font-family: var(--font-mono); font-weight: 600; color: var(--nmos); white-space: nowrap; }
+.note { border-left: 3px solid var(--rule); padding: 4px 0 4px 14px; color: var(--ink-2); font-size: .94rem; }
+footer { color: var(--ink-2); font-size: .85rem; }
+</style>
+
+<main>
+  <header>
+    <div class="eyebrow">SECDED-protected synchronous FIFO · structural view</div>
+    <h1>From Verilog to NMOS and PMOS</h1>
+    <p class="lede">The RTL was synthesised with Yosys down to only four cell types: INV, NAND2, NOR2 and a D flip-flop. Every cell is a static-CMOS circuit of <span class="p">PMOS</span> pull-ups and <span class="n">NMOS</span> pull-downs. This page shows each cell, then walks through the Verilog line by line and names the hardware it becomes.</p>
+    <div class="flow">
+      <span class="step">rtl/*.v</span><span class="arrow">→</span>
+      <span class="step">synth -flatten</span><span class="arrow">→</span>
+      <span class="step">dfflegalize</span><span class="arrow">→</span>
+      <span class="step">abc -g NAND,NOR</span><span class="arrow">→</span>
+      <span class="step">INV · NAND2 · NOR2 · DFF</span><span class="arrow">→</span>
+      <span class="step">nmos / pmos switches</span>
+    </div>
+  </header>
+
+  <section aria-labelledby="totals-h">
+    <div class="eyebrow">Full design, DATA_W = 32, DEPTH = 16, ECC_EN = 1</div>
+    <h2 id="totals-h">What the netlist contains</h2>
+    <div class="totals">
+      <div><b>393</b><span>INV · 2 T each</span></div>
+      <div><b>3,912</b><span>NAND2 · 4 T each</span></div>
+      <div><b>1,412</b><span>NOR2 · 4 T each</span></div>
+      <div><b>715</b><span>flip-flops · 36 T each</span></div>
+      <div class="sum"><b>47,822</b><span>transistors in total</span></div>
+    </div>
+    <p>Counts come from <code>gate_level/cell_counts.csv</code>. The flip-flops split into 624 plain DFF (the storage array, no reset), 89 DFFR (registers that reset to 0) and 2 DFFS (<code>empty</code> and <code>almost_empty</code>, which reset to 1).</p>
+  </section>
+
+  <section aria-labelledby="cells-h">
+    <div class="eyebrow">The four building blocks</div>
+    <h2 id="cells-h">Each cell as transistors</h2>
+    <p>One rule builds every static-CMOS gate: the <span class="p">PMOS</span> network pulls the output to VDD, the <span class="n">NMOS</span> network pulls it to GND, and the two networks are duals. Where the NMOS transistors are in series, the PMOS transistors are in parallel, and the other way round. A PMOS conducts when its gate is 0 (the bubble); an NMOS conducts when its gate is 1.</p>
+    <div class="cells">
+      <article class="cell">
+        <header><h3>INV</h3><span class="tcount">Y = ~A · 2 transistors</span></header>
+        <svg id="sch-inv" viewBox="0 0 220 210" role="img" aria-label="CMOS inverter: one PMOS from VDD to Y, one NMOS from Y to GND, both gates on A"></svg>
+        <table class="tt"><tr><th>A</th><th>Y</th></tr><tr><td>0</td><td>1</td></tr><tr><td>1</td><td>0</td></tr></table>
+        <p class="rule-line">A = 0 turns the PMOS on and the NMOS off, so Y connects to VDD. A = 1 does the opposite.</p>
+      </article>
+      <article class="cell">
+        <header><h3>NAND2</h3><span class="tcount">Y = ~(A·B) · 4 transistors</span></header>
+        <svg id="sch-nand" viewBox="0 0 230 270" role="img" aria-label="CMOS NAND2: two PMOS in parallel to VDD, two NMOS in series to GND"></svg>
+        <table class="tt"><tr><th>A</th><th>B</th><th>Y</th></tr><tr><td>0</td><td>0</td><td>1</td></tr><tr><td>0</td><td>1</td><td>1</td></tr><tr><td>1</td><td>0</td><td>1</td></tr><tr><td>1</td><td>1</td><td>0</td></tr></table>
+        <p class="rule-line">Y falls to 0 only when both series NMOS conduct, which needs A = 1 and B = 1. Either input at 0 turns on one of the parallel PMOS.</p>
+      </article>
+      <article class="cell">
+        <header><h3>NOR2</h3><span class="tcount">Y = ~(A+B) · 4 transistors</span></header>
+        <svg id="sch-nor" viewBox="0 0 230 270" role="img" aria-label="CMOS NOR2: two PMOS in series to VDD, two NMOS in parallel to GND"></svg>
+        <table class="tt"><tr><th>A</th><th>B</th><th>Y</th></tr><tr><td>0</td><td>0</td><td>1</td></tr><tr><td>0</td><td>1</td><td>0</td></tr><tr><td>1</td><td>0</td><td>0</td></tr><tr><td>1</td><td>1</td><td>0</td></tr></table>
+        <p class="rule-line">Y rises to 1 only when both series PMOS conduct, which needs A = 0 and B = 0. Either input at 1 turns on one of the parallel NMOS.</p>
+      </article>
+      <article class="cell wide">
+        <header><h3>DFF</h3><span class="tcount">Q ← D on rising C · 36 transistors</span></header>
+        <svg id="sch-dff" viewBox="0 0 380 250" role="img" aria-label="Edge-triggered D flip-flop built from six 3-input NAND gates"></svg>
+        <p class="rule-line">Six NAND3 gates (6 transistors each), the classic 7474 edge-triggered structure. While C = 0, g1 and g4 follow D. On the rising edge, g2 and g3 lock that value and set the output latch g5/g6. For DFFR the active-low reset drives CLR_n; for DFFS it drives PRE_n. A real standard-cell flip-flop uses transmission gates and needs about 24 transistors.</p>
+      </article>
+    </div>
+  </section>
+
+  <section aria-labelledby="derived-h">
+    <div class="eyebrow">Larger functions made from the four cells</div>
+    <h2 id="derived-h">Recipes the synthesiser reuses</h2>
+    <div class="scroll">
+      <table class="derived">
+        <thead><tr><th>Function</th><th>Built as</th><th>Transistors</th><th>Where it appears</th></tr></thead>
+        <tbody>
+          <tr><td>AND2</td><td>NAND2 → INV</td><td class="num">6</td><td>enables such as <code>wr_fire</code>, address decoding</td></tr>
+          <tr><td>OR2</td><td>NOR2 → INV</td><td class="num">6</td><td>sticky flags, <code>~full | rd_en</code></td></tr>
+          <tr><td>XOR2</td><td>4 × NAND2, or NOR/NAND/INV mixes</td><td class="num">14–16</td><td>every parity tree in the encoder and decoder</td></tr>
+          <tr><td>2:1 MUX</td><td>3 × NAND2 + INV</td><td class="num">14</td><td>read multiplexer, register enables</td></tr>
+          <tr><td>Register with enable</td><td>DFF + 2:1 MUX feeding Q back to D</td><td class="num">≈ 50</td><td>every <code>if (en) r &lt;= d</code></td></tr>
+          <tr><td>Half adder</td><td>XOR2 + AND2</td><td class="num">≈ 22</td><td>pointer and counter increment</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="map-h">
+    <div class="eyebrow">rtl/sync_fifo_ecc.v · rtl/secded_enc.v · rtl/secded_dec.v</div>
+    <h2 id="map-h">Your code, line by line, as hardware</h2>
+    <p>Left: the Verilog. Right: the circuit it synthesises to and how much of it the 32-bit, 16-deep design contains.</p>
+    <div class="map" id="map"></div>
+  </section>
+
+  <section aria-labelledby="trace-h">
+    <div class="eyebrow">Real excerpt · gate_level/netlist_enc_w8.v</div>
+    <h2 id="trace-h">One parity bit, traced through the netlist</h2>
+    <p>For 8-bit data the encoder places check bit 1 at codeword position 1. It covers positions 3, 5, 7, 9 and 11, which hold data bits 0, 1, 3, 4 and 6, so <code>cw_o[1] = d0 ^ d1 ^ d3 ^ d4 ^ d6</code>. Below is the gate cone Yosys actually produced, read from the output back to the inputs. The data bits themselves need no gates; the netlist simply wires them to their codeword positions.</p>
+    <div class="tree" id="tree"></div>
+    <p>Pairs such as <code>NOR2(d1,d4)</code> and <code>NAND2(d1,d4)</code> combine into an XOR of d1 and d4. Four such XOR stages chain the five data bits into one parity bit. The whole 8-bit encoder is 16 INV, 32 NAND2 and 29 NOR2, which is 276 transistors.</p>
+  </section>
+
+  <section aria-labelledby="budget-h">
+    <div class="eyebrow">DATA_W = 32, DEPTH = 16</div>
+    <h2 id="budget-h">Where the 47,822 transistors go</h2>
+    <div class="budget">
+      <div class="bar" id="bar" role="img" aria-label="Transistor budget split by block"></div>
+      <div class="legend" id="legend"></div>
+    </div>
+    <p class="note">Flip-flop numbers are exact. Encoder and decoder numbers come from synthesising those modules on their own, so the split of the remaining logic is approximate. Storage dominates: more than half of all transistors hold the 624 stored bits.</p>
+  </section>
+
+  <section aria-labelledby="proof-h">
+    <div class="eyebrow">gate_level/logs/gate_level_summary.txt</div>
+    <h2 id="proof-h">Proof that the transistor circuit equals the RTL</h2>
+    <p>The original self-checking testbenches were run again on the synthesised netlists, with every cell simulated as Verilog <code>nmos</code>/<code>pmos</code> switch primitives from <code>gate_level/cmos_cells.v</code>.</p>
+    <div class="scroll">
+      <table class="proof">
+        <tr><td>SECDED codec, 8-bit data: all 256 words, every single and double error</td><td>PASS</td></tr>
+        <tr><td>SECDED codec, 32-bit data</td><td>PASS</td></tr>
+        <tr><td>Conventional FIFO, 8 × 4</td><td>PASS</td></tr>
+        <tr><td>SECDED FIFO, 8 × 4, 85,852 cycles including counter saturation</td><td>PASS</td></tr>
+        <tr><td>SECDED FIFO, 32 × 16, the full 47,822-transistor design</td><td>PASS</td></tr>
+        <tr><td>Negative control: one NAND2 with its NMOS wired in parallel instead of series</td><td>detected</td></tr>
+      </table>
+    </div>
+    <p class="note">Each cell drives its output through a 10 ps delay that stands in for the RC delay of the node. Without it, the flip-flop feedback loops would race in zero simulated time.</p>
+  </section>
+
+  <section aria-labelledby="try-h">
+    <div class="eyebrow">Reproduce</div>
+    <h2 id="try-h">Look at it yourself</h2>
+<pre>python3 scripts/gate_level.py          # writes gate_level/netlist_*.v and cell_counts.csv
+bash scripts/run_gate_level_sim.sh     # transistor-level simulations, logs in gate_level/logs/
+
+# open a small netlist first; every line is one gate:
+#   NAND2 _128_ (.A(_002_), .B(_003_), .Y(_006_));
+less gate_level/netlist_enc_w8.v</pre>
+    <p>Start with <code>netlist_enc_w8.v</code> (77 gates), then <code>netlist_fifo_w8_d4.v</code>. The 32 × 16 netlist has about 6,400 cell instances, too many to read by hand, but the same patterns repeat.</p>
+  </section>
+
+  <footer>Library restricted to INV, NAND2, NOR2 and DFF for teaching. A foundry library adds AOI/OAI, XOR and smaller flip-flop cells, so a production netlist of the same RTL would use noticeably fewer transistors.</footer>
+</main>
+
+<script>
+(function () {
+  // ---------- schematic helpers ----------
+  var NS = "http://www.w3.org/2000/svg";
+  function el(svg, tag, attrs, text) {
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (text != null) e.textContent = text;
+    svg.appendChild(e);
+    return e;
+  }
+  function line(svg, x1, y1, x2, y2, cls) {
+    el(svg, "line", { x1: x1, y1: y1, x2: x2, y2: y2, stroke: "var(" + (cls || "--wire") + ")", "stroke-width": 1.6, "stroke-linecap": "round" });
+  }
+  function dot(svg, x, y) { el(svg, "circle", { cx: x, cy: y, r: 2.6, fill: "var(--wire)" }); }
+  // MOSFET centred at (cx,cy); drain at (cx+12, cy-20), source at (cx+12, cy+20), gate label left
+  function fet(svg, cx, cy, type, label) {
+    var c = type === "p" ? "--pmos" : "--nmos";
+    var col = "var(" + c + ")";
+    el(svg, "line", { x1: cx, y1: cy - 14, x2: cx, y2: cy + 14, stroke: col, "stroke-width": 3 });
+    el(svg, "line", { x1: cx - 7, y1: cy - 12, x2: cx - 7, y2: cy + 12, stroke: col, "stroke-width": 1.8 });
+    if (type === "p") {
+      el(svg, "circle", { cx: cx - 11, cy: cy, r: 3.6, fill: "var(--sheet)", stroke: col, "stroke-width": 1.6 });
+      line(svg, cx - 30, cy, cx - 14.6, cy, c);
+    } else {
+      line(svg, cx - 30, cy, cx - 7, cy, c);
+    }
+    line(svg, cx, cy - 10, cx + 12, cy - 10, c);
+    line(svg, cx + 12, cy - 10, cx + 12, cy - 20, c);
+    line(svg, cx, cy + 10, cx + 12, cy + 10, c);
+    line(svg, cx + 12, cy + 10, cx + 12, cy + 20, c);
+    el(svg, "text", { x: cx - 34, y: cy + 4, "text-anchor": "end" }, label);
+  }
+  function vdd(svg, x1, x2, y) {
+    line(svg, x1, y, x2, y);
+    el(svg, "text", { x: x2 + 6, y: y + 4 }, "VDD");
+  }
+  function gnd(svg, x, y) {
+    line(svg, x - 10, y, x + 10, y); line(svg, x - 6, y + 4, x + 6, y + 4); line(svg, x - 2, y + 8, x + 2, y + 8);
+  }
+  function out(svg, x, y, x2) {
+    dot(svg, x, y); line(svg, x, y, x2, y);
+    el(svg, "text", { x: x2 + 5, y: y + 4, "font-weight": 600 }, "Y");
+  }
+
+  // INV
+  var s = document.getElementById("sch-inv");
+  vdd(s, 80, 150, 22);
+  fet(s, 100, 62, "p", "A"); line(s, 112, 22, 112, 42);
+  line(s, 112, 82, 112, 128);
+  fet(s, 100, 148, "n", "A"); line(s, 112, 168, 112, 182); gnd(s, 112, 182);
+  out(s, 112, 105, 175);
+
+  // NAND2
+  s = document.getElementById("sch-nand");
+  vdd(s, 60, 180, 22);
+  fet(s, 70, 62, "p", "A"); fet(s, 150, 62, "p", "B");
+  line(s, 82, 22, 82, 42); line(s, 162, 22, 162, 42);
+  line(s, 82, 82, 82, 96); line(s, 162, 82, 162, 96); line(s, 82, 96, 162, 96);
+  dot(s, 122, 96); line(s, 122, 96, 122, 128);
+  fet(s, 110, 148, "n", "A"); fet(s, 110, 208, "n", "B");
+  line(s, 122, 168, 122, 188); line(s, 122, 228, 122, 244); gnd(s, 122, 244);
+  out(s, 122, 112, 195);
+  el(s, "text", { x: 132, y: 182, fill: "var(--ink-2)" }, "series");
+  el(s, "text", { x: 92, y: 116, fill: "var(--ink-2)", "text-anchor": "end" }, "parallel ↑");
+
+  // NOR2
+  s = document.getElementById("sch-nor");
+  vdd(s, 90, 150, 22);
+  fet(s, 110, 52, "p", "A"); line(s, 122, 22, 122, 32);
+  fet(s, 110, 112, "p", "B"); line(s, 122, 72, 122, 92);
+  line(s, 122, 132, 122, 166);
+  line(s, 82, 166, 162, 166); dot(s, 122, 166);
+  fet(s, 70, 206, "n", "A"); fet(s, 150, 206, "n", "B");
+  line(s, 82, 166, 82, 186); line(s, 162, 166, 162, 186);
+  line(s, 82, 226, 82, 240); line(s, 162, 226, 162, 240); line(s, 82, 240, 162, 240); gnd(s, 122, 240);
+  out(s, 122, 150, 195);
+  el(s, "text", { x: 132, y: 86, fill: "var(--ink-2)" }, "series");
+
+  // DFF: six NAND3 gates; each box lists its three inputs, arrows name its output net
+  s = document.getElementById("sch-dff");
+  function box(x, y, name, inputs, outNet, strong) {
+    el(s, "rect", { x: x, y: y, width: 92, height: 38, rx: 3, fill: "var(--sheet)", stroke: "var(--accent)", "stroke-width": 1.4 });
+    el(s, "text", { x: x + 46, y: y + 16, "text-anchor": "middle", "font-weight": 600 }, name);
+    el(s, "text", { x: x + 46, y: y + 30, "text-anchor": "middle", fill: "var(--ink-2)", "font-size": "10px" }, inputs);
+    line(s, x + 92, y + 19, x + 112, y + 19);
+    el(s, "text", { x: x + 116, y: y + 23, "font-weight": strong ? 700 : 400 }, outNet);
+  }
+  el(s, "text", { x: 10, y: 14, fill: "var(--ink-2)", "font-size": "10px" }, "INPUT LATCH (samples D)");
+  box(10, 22, "g1 NAND3", "PRE_n, n4, n2", "n1");
+  box(10, 76, "g2 NAND3", "n1, CLR_n, C", "n2");
+  box(10, 130, "g3 NAND3", "n2, C, n4", "n3");
+  box(10, 184, "g4 NAND3", "n3, CLR_n, D", "n4");
+  el(s, "text", { x: 200, y: 68, fill: "var(--ink-2)", "font-size": "10px" }, "OUTPUT LATCH");
+  box(200, 76, "g5 NAND3", "PRE_n, n2, qn", "Q", true);
+  box(200, 130, "g6 NAND3", "Q, n3, CLR_n", "qn");
+  el(s, "text", { x: 200, y: 200, fill: "var(--ink-2)", "font-size": "10px" }, "n2 = 0 sets Q to 1");
+  el(s, "text", { x: 200, y: 214, fill: "var(--ink-2)", "font-size": "10px" }, "n3 = 0 clears Q to 0");
+  el(s, "text", { x: 200, y: 236, "font-size": "10.5px" }, "6 gates x 6 T = 36 T");
+
+  // ---------- code map ----------
+  var rows = [
+    { f: "sync_fifo_ecc.v", c: "reg [MEM_W-1:0] mem [0:DEPTH-1];",
+      h: "The storage array: one DFF per stored bit. It has no reset in the RTL, so synthesis uses the plain DFF cell.",
+      n: "16 words × 39 bits = 624 DFF = 22,464 transistors" },
+    { f: "sync_fifo_ecc.v", c: "always @(posedge clk)\n  if (wr_fire) mem[wr_ptr] <= wr_word;",
+      h: "A write-address decoder turns the 4-bit wr_ptr into 16 one-hot word enables, each ANDed with wr_fire. Because the DFF cell has no enable pin, every bit gets a 2:1 MUX that feeds Q back to D when its word is not being written.",
+      n: "16 word enables, 624 feedback multiplexers" },
+    { f: "sync_fifo_ecc.v", c: "assign rd_word = mem[rd_ptr];",
+      h: "A read multiplexer per codeword bit: a 16:1 MUX built as a tree of fifteen 2:1 MUX, selected by the 4 bits of rd_ptr.",
+      n: "39 bits × 15 = 585 two-input multiplexers" },
+    { f: "sync_fifo_ecc.v", c: "wire rd_fire = rd_en & ~empty;\nwire wr_fire = wr_en & (~full | rd_en);",
+      h: "Plain gates: an inverter on empty and full, then NAND/NOR combinations. These two nets fan out to almost every register enable.",
+      n: "a handful of INV / NAND2 / NOR2" },
+    { f: "sync_fifo_ecc.v", c: "always @(posedge clk or negedge rst_n)\n  if (!rst_n) wr_ptr <= 0;\n  ...",
+      h: "The asynchronous reset becomes the R pin of the flip-flop. Inside the cell it drives CLR_n of the NAND3 gates, forcing Q to 0 without waiting for the clock.",
+      n: "89 DFFR cells use this pin" },
+    { f: "sync_fifo_ecc.v", c: "if (wr_fire) wr_ptr <= wr_ptr + 1'b1;",
+      h: "A 4-bit incrementer: bit i toggles when all lower bits are 1, so it is an XOR per bit and an AND chain. The result goes through an enable MUX into four DFFR.",
+      n: "same structure for rd_ptr" },
+    { f: "sync_fifo_ecc.v", c: "count_nxt = count + wr_fire - rd_fire;",
+      h: "A 5-bit up/down counter: the logic adds +1, −1 or 0 depending on the two fire signals. Because count_nxt feeds all the flag comparators, this adder sits at the head of the longest control path.",
+      n: "5 DFFR plus adder logic" },
+    { f: "sync_fifo_ecc.v", c: "full  <= (count_nxt == DEPTH);\nempty <= (count_nxt == 0);",
+      h: "Comparison with a constant reduces to an AND of true or inverted bits (10000 for full, 00000 for empty), which becomes a small NOR/NAND tree. empty resets to 1, so it uses DFFS, whose reset drives PRE_n.",
+      n: "full → DFFR, empty → DFFS" },
+    { f: "sync_fifo_ecc.v", c: "almost_full  <= (count_nxt >= af_thresh);\nalmost_empty <= (count_nxt <= ae_thresh);",
+      h: "Two 5-bit magnitude comparators. Each is a subtractor whose final borrow says which side is larger, built from XOR and AND/OR stages.",
+      n: "the second DFFS cell is almost_empty" },
+    { f: "secded_enc.v", c: "for (j = 0; j < PAR_W; j = j + 1)\n  for (i = 1; i <= HAM_W; i = i + 1)\n    if (((i >> j) & 1) && i != (1 << j))\n      c[1<<j] = c[1<<j] ^ c[i];",
+      h: "The loops do not exist in hardware. They unroll at elaboration into seven XOR trees, one per check bit, each XORing the data bits whose position has bit j set. Data bits pass straight through as wires.",
+      n: "≈ 448 gates, ≈ 1,650 transistors" },
+    { f: "secded_dec.v", c: "syn[j] = syn[j] ^ cw_i[i];   // syndrome\novp = ^cw_i;                 // overall parity\nif (syn_i == i) fixed[i] = ~fixed[i];",
+      h: "Six syndrome XOR trees over the stored 39 bits, plus one 39-input XOR tree for overall parity. A decoder compares the syndrome with each bit position and drives one XOR per data bit that flips the bad bit. sec_o and ded_o come from a few gates on the syndrome and parity.",
+      n: "≈ 626 gates, ≈ 2,306 transistors" },
+    { f: "sync_fifo_ecc.v", c: "if (rd_fire) rd_word_q <= rd_word;",
+      h: "The read register: 39 DFFR with an enable MUX. The decoder sits after it, so rd_data is decoded combinationally from these flip-flops.",
+      n: "39 DFFR" },
+    { f: "sync_fifo_ecc.v", c: "if (sec_err && (sec_cnt != 16'hFFFF))\n  sec_cnt <= sec_cnt + 1'b1;",
+      h: "A 16-bit incrementer plus a 16-input AND that detects all ones and blocks the increment (saturation). clr_status adds a gate that forces D to 0.",
+      n: "16 DFFR each for sec_cnt and ded_cnt" },
+    { f: "sync_fifo_ecc.v", c: "if (wr_en & ~wr_fire) overflow <= 1'b1;",
+      h: "A sticky flag: D = clear ? 0 : (Q OR event). Once set, the OR keeps feeding 1 back until clr_status.",
+      n: "overflow and underflow: 2 DFFR" }
+  ];
+  var map = document.getElementById("map");
+  rows.forEach(function (r) {
+    var row = document.createElement("div"); row.className = "row";
+    var a = document.createElement("div");
+    var w = document.createElement("div"); w.className = "where"; w.textContent = r.f;
+    var pre = document.createElement("pre"); pre.textContent = r.c;
+    a.appendChild(w); a.appendChild(pre);
+    var b = document.createElement("div");
+    var h = document.createElement("p"); h.className = "hw"; h.textContent = r.h;
+    var n = document.createElement("div"); n.className = "cnt"; n.textContent = r.n;
+    b.appendChild(h); b.appendChild(n);
+    row.appendChild(a); row.appendChild(b); map.appendChild(row);
+  });
+
+  // ---------- netlist cone ----------
+  var cone = [
+    "cw_o[1]  <= INV   _087_ (A=_021_)",
+    "  _021_  <= NAND2 _086_ (A=_019_, B=_020_)",
+    "    _019_  <= NAND2 _083_ (A=_011_, B=_018_)",
+    "      _011_  <= NOR2  _075_ (A=_007_, B=_009_)",
+    "        _007_  <= NOR2  _139_ (A=_000_, B=_006_)",
+    "          _000_  <= INV   _072_ (A=data_i[3])",
+    "          _006_  <= NAND2 _128_ (A=_002_, B=_003_)",
+    "            _002_  <= INV   _084_ (A=_001_)",
+    "              _001_  <= NOR2  _073_ (A=data_i[1], B=data_i[4])",
+    "            _003_  <= NAND2 _095_ (A=data_i[1], B=data_i[4])",
+    "        _009_  <= NOR2  _148_ (A=data_i[3], B=_005_)",
+    "          _005_  <= NOR2  _117_ (A=_001_, B=_004_)",
+    "            _004_  <= INV   _106_ (A=_003_)",
+    "      _018_  <= NOR2  _082_ (A=_013_, B=_016_)",
+    "        _013_  <= NOR2  _077_ (A=data_i[6], B=data_i[0])",
+    "        _016_  <= INV   _080_ (A=_015_)",
+    "          _015_  <= NAND2 _079_ (A=data_i[6], B=data_i[0])",
+    "    _020_  <= NAND2 _085_ (A=_012_, B=_017_)",
+    "      _012_  <= NAND2 _076_ (A=_008_, B=_010_)",
+    "        _008_  <= NAND2 _147_ (A=data_i[3], B=_005_)",
+    "        _010_  <= NAND2 _074_ (A=_000_, B=_006_)",
+    "      _017_  <= NAND2 _081_ (A=_014_, B=_015_)",
+    "        _014_  <= INV   _078_ (A=_013_)"
+  ];
+  var tree = document.getElementById("tree");
+  cone.forEach(function (l, i) {
+    var parts = l.split(/(INV|NAND2|NOR2|data_i\[\d\])/);
+    parts.forEach(function (p) {
+      var sp = document.createElement("span");
+      if (/^(INV|NAND2|NOR2)$/.test(p)) sp.className = "g";
+      else if (/^data_i/.test(p)) sp.className = "in";
+      sp.textContent = p; tree.appendChild(sp);
+    });
+    if (i < cone.length - 1) tree.appendChild(document.createTextNode("\n"));
+  });
+
+  // ---------- transistor budget ----------
+  var total = 47822;
+  var parts = [
+    { k: "Storage flip-flops (624 DFF)", v: 22464, c: "var(--accent)" },
+    { k: "Control and status flip-flops (91)", v: 3276, c: "var(--nmos)" },
+    { k: "SECDED encoder (approx.)", v: 1650, c: "var(--pmos)" },
+    { k: "SECDED decoder (approx.)", v: 2306, c: "var(--ink-2)" }
+  ];
+  var used = parts.reduce(function (a, p) { return a + p.v; }, 0);
+  parts.push({ k: "Write enables, read multiplexer, pointers, counters, comparators", v: total - used, c: "var(--rule)" });
+  var bar = document.getElementById("bar"), leg = document.getElementById("legend");
+  parts.forEach(function (p) {
+    var d = document.createElement("div");
+    d.style.width = (100 * p.v / total).toFixed(2) + "%"; d.style.background = p.c;
+    d.title = p.k + ": " + p.v.toLocaleString("en-US");
+    bar.appendChild(d);
+    var r = document.createElement("div");
+    var i = document.createElement("i"); i.style.background = p.c;
+    var t = document.createElement("span"); t.textContent = p.k;
+    var v = document.createElement("span"); v.className = "v";
+    v.textContent = p.v.toLocaleString("en-US") + " T · " + (100 * p.v / total).toFixed(1) + " %";
+    r.appendChild(i); r.appendChild(t); r.appendChild(v); leg.appendChild(r);
+  });
+})();
+</script>

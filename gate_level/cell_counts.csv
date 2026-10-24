@@ -1,0 +1,8 @@
+config,top,INV,NAND2,NOR2,DFF,DFFR,DFFS,logic_gates,flip_flops,transistors
+enc_w8,secded_enc,16,32,29,0,0,0,77,0,276
+dec_w8,secded_dec,30,87,60,0,0,0,177,0,648
+enc_w32,secded_enc,71,184,193,0,0,0,448,0,1650
+dec_w32,secded_dec,99,294,233,0,0,0,626,0,2306
+base_w8_d4,fifo_baseline,21,209,31,32,15,0,261,47,2694
+fifo_w8_d4,sync_fifo_ecc,133,541,316,52,57,2,990,111,7690
+fifo_w32_d16,sync_fifo_ecc,393,3912,1412,624,89,2,5717,715,47822
